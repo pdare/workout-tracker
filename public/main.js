@@ -16,6 +16,7 @@ function createWindow() {
         frame: false,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
+            contextIsolation: false
         },
     });
 
@@ -27,6 +28,10 @@ function createWindow() {
         })
         : "http://localhost:3000";
     window.loadURL('http://localhost:3000');
+
+    window.on('closed', function (){
+        app.quit();
+    });
 
     /**if (!app.isPackaged) {
         window.webContents.openDevTools();
